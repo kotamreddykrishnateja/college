@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sliding Text with Color Change</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    background-color: #f0f0f0; /* Initial background color */
+  }
+  .sliding-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 36px;
+    white-space: nowrap;
+    transition: color 0.5s ease-in-out, left 2s ease-in-out;
+  }
+</style>
+</head>
+<body>
+
+<div class="sliding-text" id="slidingText" style="color: blue;">Slide Me!</div>
+
+<script>
+  window.onload = function() {
+    var slidingText = document.getElementById("slidingText");
+    var colors = ["blue", "green", "red"]; // Change these to desired colors
+    var currentIndex = 0;
+
+    function changeColors() {
+      slidingText.style.color = colors[currentIndex];
+      document.body.style.backgroundColor = colors[currentIndex]; // Change background color
+      currentIndex = (currentIndex + 1) % colors.length;
+    }
+
+    setInterval(function() {
+      slidingText.style.left = "150%"; // Move text off the screen
+      setTimeout(function() {
+        slidingText.style.left = "-50%"; // Move text back to the screen
+        changeColors(); // Change text and background color
+      }, 2000); // Adjust this value for the speed of the animation
+    }, 4000); // Adjust this value for the duration between color changes
+  };
+</script>
+
+</body>
+</html>
